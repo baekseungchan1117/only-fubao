@@ -4,38 +4,38 @@ const community = function (Sequelize, Database) {
     {
       id: {
         type: Database.BIGINT,
-        allowNull: false,
+        allowNull: true,
         primaryKey: true,
         autoIncrement: true,
       },
       user_id: {
         type: Database.BIGINT,
-        allowNull: true,
+        allowNull: false,
       },
       title: {
         type: Database.STRING(50),
         allowNull: true,
       },
       content: {
-        type:  Database.STRING(50),
+        type: Database.STRING(45),
         allowNull: false,
       },
       img: {
         type: Database.STRING(50),
-        allowNull: true,
+        allowNull: false,
       },
       comment: {
         type: Database.STRING(50),
-        allowNull: true,
+        allowNull: false,
       },
       faviorite_num: {
         type: Database.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       faviorite_id: {
         type: Database.INTEGER,
-        allowNull: true,
-      },  
+        allowNull: false,
+      },
     },
     {
       tablename: "community",

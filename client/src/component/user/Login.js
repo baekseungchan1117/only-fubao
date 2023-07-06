@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./User.css";
 
 export default function Login() {
+
+  const [Email, setEmail] = useState("");
+  const [PW, setPW] = useState("");
+
+  const LoginFunc = async (e) => {
+    e.preventDefault();
+    if (!(Email && PW)) {
+      return alert("모든 값을 채워주세요.");
+    }
+  }
+
   return (
     <>
       <div class="wrapper">
@@ -17,6 +28,8 @@ export default function Login() {
                 placeholder="Email Address"
                 required=""
                 autofocus=""
+                value={Email}
+                onChange={(e) => setEmail(e.currentTarget.value)}
               />
             </div>
             <div class="input">
@@ -27,6 +40,8 @@ export default function Login() {
                 name="password"
                 placeholder="Password"
                 required=""
+                value={PW}
+                onChange={(e) => setPW(e.currentTarget.value)}
               />
             </div>
           </div>
