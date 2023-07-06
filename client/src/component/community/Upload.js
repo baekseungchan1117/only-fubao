@@ -50,7 +50,6 @@ export default function Upload() {
             setTitle(e.currentTarget.value);
           }}
         />
-
         <label htmlFor="content">Content</label>
         <textarea
           id="content"

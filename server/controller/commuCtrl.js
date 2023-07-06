@@ -63,6 +63,7 @@ exports.patchCommunity = async (req, res) => {
 };
 //게시글 삭제
 exports.deleteCommunity = async (req, res) => {
+  console.log(req.params.id);
   try {
     const deleteCommunity = await Community.destroy({
       where: {
