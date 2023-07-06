@@ -1,0 +1,87 @@
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "bitbit";
+  src: url("//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff"),
+    url("//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2");
+}
+@font-face {
+  font-family: "LINESeedKR-Bd";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+.detail-box {
+  display: flex;
+  margin: 0 auto;
+  margin-left: 13%;
+}
+.detail-img-box {
+  width: 600px;
+  display: flex;
+  justify-content: center;
+}
+.detail-text-box {
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: "TheJamsil5Bold";
+}
+.detail-title {
+  font-size: 40px;
+  margin: 2%;
+}
+.detail-content {
+  font-size: 20px;
+  margin: 2%;
+}
+.detail-price {
+  font-size: 18px;
+  margin: 2%;
+}
+.tab-box {
+  font-family: "bitbit";
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.tab-box-inner {
+  font-size: 30px;
+  margin: 3%;
+  text-decoration: underline;
+  color: rgb(70, 108, 244);
+}
+.tab-text {
+  font-family: "LINESeedKR-Bd";
+  justify-content: center;
+  flex-direction: row;
+  text-align: start;
+  font-size: 20px;
+  width: 1000px;
+  margin: 0 auto;
+}
+.start {
+  opacity: 0;
+}
+.end {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.modal {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #61DAFB;
+  text-align: left;
+  width: 1000px;
+  height: 1000px;
+  background-color: aquamarine;
+  z-index: 2;
+  position: relative;
+}
