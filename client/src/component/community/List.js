@@ -10,7 +10,7 @@ export default function List() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8000/community");
-        setPostList(response.data.data); 
+        setPostList(response.data.data);
       } catch (error) {
         console.log(error);
       }

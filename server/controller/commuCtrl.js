@@ -18,7 +18,7 @@ exports.getCommunitySeg = async (req, res) => {
     const communitySeg = await Community.findOne({
       attributes: ["title", "img", "content"],
       where: {
-        id : Number(req.params.id)
+        id: Number(req.params.id)
       },
     });
     res.send({ result: true, data: communitySeg });
