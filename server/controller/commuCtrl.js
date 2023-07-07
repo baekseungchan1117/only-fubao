@@ -1,6 +1,7 @@
 const model = require("../models");
 const { Op } = require("sequelize");
 const { Community } = require("../models");
+const multer = require('multer')
 
 // 커뮤니티 전체 조회
 exports.getCommunity = async (req, res) => {
@@ -29,10 +30,10 @@ exports.getCommunitySeg = async (req, res) => {
 exports.postCommunity = async (req, res) => {
   try {
     const { title, img, content } = req.body;
-    console.log(req.body)
+    console.log(req.body, req.formData, res.req.file)
     const mycommunity = await Community.create({
       title,
-      // img,
+      img,
       content,
     });
     res.send({ result: true, data: mycommunity });
@@ -40,6 +41,32 @@ exports.postCommunity = async (req, res) => {
     res.send({ result: false, data: error });
   }
 };
+
+// 이미지 처리
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'image/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage }).single("file")
+
+exports.postUpload = (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ message: 'Failed to upload image' });
+    } else {
+      res.json({ message: 'Image uploaded successfully', success: true, filepath : res.req.file.path});
+    }
+  });
+};
+
+
+
 //게시글 수정
 exports.patchCommunity = async (req, res) => {
   const { title, img, comment } = req.body;
@@ -63,6 +90,7 @@ exports.patchCommunity = async (req, res) => {
 };
 //게시글 삭제
 exports.deleteCommunity = async (req, res) => {
+  console.log(req.params.id);
   try {
     const deleteCommunity = await Community.destroy({
       where: {
