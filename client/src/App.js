@@ -4,13 +4,14 @@ import Community from "./component/community/Community";
 import MainPage from "./component/MainPage";
 import Login from "./component/user/Login";
 import Signup from "./component/user/Signup";
-import Footer from "./component/Footer"
+import Footer from "./component/Footer";
 import { Routes, Route } from "react-router-dom";
 import ShopPage from "./component/ShopPage";
 import GoodsDetailPage from "./component/GoodsDetailPage";
 import CartPage from "./component/CartPage";
 import Detail from "./component/community/Detail";
 import Edit from "./component/community/Edit";
+
 
 function App() {
   return (
@@ -24,8 +25,8 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path='/community/detail/:postNum' element={<Detail />} />
-        <Route path='/Edit/:postNum' element={<Edit />} />
+        <Route path="/community/detail/:postNum" element={<Detail />} />
+        <Route path="/Edit/:postNum" element={<Edit />} />
       </Routes>
       <Footer />
     </>
