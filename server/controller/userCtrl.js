@@ -46,15 +46,18 @@ exports.postSignup = async (req, res) => {
   }
 };
 // 로그인 post{
-exports.postLogin = async(req,res)=>{
+exports.postLogin = async (req, res) => {
   try {
-    const {id,password} = req.body;
-    const postlogin = await User.create({
-      id,
-      password
+    const { Email, PW } = req.body;
+    const postlogin = await model.User.findAll({
+      attributes: ['nickname'],
+      where: {
+        email: Email,
+        password: PW
+      }
     })
-    res.send({result: true, data: postlogin})
+    res.send({ result: true, data: postlogin[0].dataValues.nickname })
   } catch (error) {
-    res.send({result: false, data: error})
+    res.send({ result: false, data: error })
   }
 }
