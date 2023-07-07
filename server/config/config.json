@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": "!Qortmdcks95",
-    "database": "fubao",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "admin",
+    "password": "tlsfk656!",
+    "database": "kdt7",
+    "host": "kdt7-test.cm7vhrymm2jy.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql",
+    "port": "3306"
   },
   "test": {
     "username": "root",
