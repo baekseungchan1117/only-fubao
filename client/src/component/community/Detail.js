@@ -58,7 +58,7 @@ export default function Detail() {
       fetchData();
     }
   };
-  console.log("dfsdsfdsf", PostInfo);
+  
   return (
     <div>
       <PostDiv>
@@ -67,7 +67,7 @@ export default function Detail() {
             <Post>
               <h1>{PostInfo.title}</h1>
               {PostInfo.img ? (
-                <img src={`http://localhost:8000/${PostInfo.img}`} alt="" />
+                <img src={PostInfo.img} alt="" />
               ) : null}
               <p>{PostInfo.content}</p>
             </Post>

@@ -34,9 +34,8 @@ export default function Upload() {
     axios
       .post('http://localhost:8000/community/lounge', body)
       .then((response) => {
-        alert('작성 성공');
-        console.log(response);
-        window.location.reload();
+          alert('작성 성공');
+          window.location.reload();
       })
       .catch((err) => {
         console.log(err);

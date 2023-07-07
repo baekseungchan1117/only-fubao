@@ -2,6 +2,7 @@ const model = require("../models");
 const { Op } = require("sequelize");
 const { Community } = require("../models");
 const multer = require('multer')
+const setUpload = require('../Util/upload');
 
 // 커뮤니티 전체 조회
 exports.getCommunity = async (req, res) => {
@@ -43,28 +44,41 @@ exports.postCommunity = async (req, res) => {
   }
 };
 
-// 이미지 처리
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'image/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname)
-  }
-})
+// 로컬 이미지 처리
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'image/')
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + '-' + file.originalname)
+//   }
+// })
 
-const upload = multer({ storage: storage }).single("file")
+// const upload = multer({ storage: storage }).single("file")
 
-exports.postUpload = (req, res) => {
+// exports.postUpload = (req, res) => {
+//   upload(req, res, (err) => {
+//     if (err) {
+//       console.log(err);
+//       res.status(500).json({ message: 'Failed to upload image' });
+//     } else {
+//       res.json({ message: 'Image uploaded successfully', success: true, filepath : res.req.file.path});
+//     }
+//   });
+// };
+
+// S3 이미지 처리
+exports.postUpload = (req, res, next) => {
+  const upload = setUpload('fanda-community/post');
   upload(req, res, (err) => {
     if (err) {
       console.log(err);
-      res.status(500).json({ message: 'Failed to upload image' });
-    } else {
-      res.json({ message: 'Image uploaded successfully', success: true, filepath: res.req.file.path });
+      return res.status(500).json({ message: 'Failed to upload image' });
     }
+    res.status(200).json({ message: 'Image uploaded successfully', filePath : res.req.file.location });
   });
 };
+
 
 
 

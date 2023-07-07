@@ -13,15 +13,15 @@ const community = function (Sequelize, Database) {
         allowNull: true,
       },
       title: {
-        type: Database.STRING(50),
+        type: Database.STRING(500),
         allowNull: true,
       },
       content: {
-        type: Database.STRING(45),
+        type:  Database.STRING(500),
         allowNull: false,
       },
       img: {
-        type: Database.STRING(50),
+        type: Database.STRING(500),
         allowNull: true,
       },
       comment: {
