@@ -29,7 +29,7 @@ export default function Upload() {
       content: Content,
       img: Image,
     };
-    console.log(body.title);
+    console.log('body title content img입니다', body.title);
 
     axios
       .post('http://localhost:8000/community/lounge', body)
@@ -55,7 +55,7 @@ export default function Upload() {
           }}
         />
         {/* <Galley /> */}
-        <ImageUpload setImage={setImage}/>
+        <ImageUpload setImage={setImage} />
         <label htmlFor="content">Content</label>
         <textarea
           id="content"

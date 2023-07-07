@@ -35,7 +35,7 @@ const community = function (Sequelize, Database) {
       faviorite_id: {
         type: Database.INTEGER,
         allowNull: true,
-      },  
+      },
     },
     {
       tablename: "community",

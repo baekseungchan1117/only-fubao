@@ -19,7 +19,7 @@ exports.getCommunitySeg = async (req, res) => {
     const communitySeg = await Community.findOne({
       attributes: ["title", "img", "content"],
       where: {
-        id : Number(req.params.id)
+        id: Number(req.params.id)
       },
     });
     res.send({ result: true, data: communitySeg });
@@ -31,12 +31,13 @@ exports.getCommunitySeg = async (req, res) => {
 exports.postCommunity = async (req, res) => {
   try {
     const { title, img, content } = req.body;
-    console.log(req.body, req.formData, res.req.file)
+    console.log('1', req.body, 'title=', title)
     const mycommunity = await Community.create({
       title,
       img,
       content,
     });
+    console.log('mycommunity', mycommunity)
     res.send({ result: true, data: mycommunity });
   } catch (error) {
     res.send({ result: false, data: error });
