@@ -44,7 +44,6 @@ exports.postSignup = async (req, res) => {
   console.log(hashedPw);
   try {
     const postsignup = await User.create({
-      id,
       password: hashedPw,
       username,
       nickname,
