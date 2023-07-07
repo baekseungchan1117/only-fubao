@@ -23,21 +23,19 @@ export default function LoginFunc() {
       PW
     }
 
-    axios({
-      method: "POST",
-      url: `${SERVER}/user/signin`,
-      data: user
-    }).then((res) => {
-      // console.log(res.data.data)
-      if (res.data.result) {
-        alert(`${res.data.data}님 환영합니다!`);
-        navigate(`/`)
-      } else {
-        alert("아이디 혹은 비밀번호가 맞지 않습니다.")
-      }
-    }
-
-    )
+    // axios({
+    //   method: "POST",
+    //   url: `${SERVER}/user/signin`,
+    //   data: user
+    // }).then((res) => {
+    //   // console.log(res.data.data)
+    //   if (res.data.result) {
+    //     alert(`${res.data.data}님 환영합니다!`);
+    //     navigate(`/`)
+    //   } else {
+    //     alert("아이디 혹은 비밀번호가 맞지 않습니다.")
+    //   }
+    // })
   }
 
   return (
