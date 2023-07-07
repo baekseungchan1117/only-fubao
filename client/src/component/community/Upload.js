@@ -35,7 +35,6 @@ export default function Upload() {
       .post('http://localhost:8000/community/lounge', body)
       .then((response) => {
           alert('작성 성공');
-          console.log(response);
           window.location.reload();
       })
       .catch((err) => {
