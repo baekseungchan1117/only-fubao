@@ -32,9 +32,9 @@ exports.postCommunity = async (req, res) => {
     const { title, img, content } = req.body;
     console.log('1', req.body, 'title=', title)
     const mycommunity = await Community.create({
-      title: 'hlhl',
+      title,
       img,
-      content: 'sibal',
+      content,
     });
     console.log('mycommunity', mycommunity)
     res.send({ result: true, data: mycommunity });
