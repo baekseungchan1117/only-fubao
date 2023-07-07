@@ -20,9 +20,10 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/shop/detail/:id" element={<GoodsDetailPage />} />
-        <Route path="/cart" element={<CartPage/>} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/community" element={<Community />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path='/community/detail/:postNum' element={<Detail />} />
         <Route path='/Edit/:postNum' element={<Edit />} />
       </Routes>
