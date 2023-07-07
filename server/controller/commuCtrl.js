@@ -30,12 +30,13 @@ exports.getCommunitySeg = async (req, res) => {
 exports.postCommunity = async (req, res) => {
   try {
     const { title, img, content } = req.body;
-    console.log(req.body, req.formData, res.req.file)
+    console.log('1', req.body, 'title=', title)
     const mycommunity = await Community.create({
-      title,
+      title: 'hlhl',
       img,
-      content,
+      content: 'sibal',
     });
+    console.log('mycommunity', mycommunity)
     res.send({ result: true, data: mycommunity });
   } catch (error) {
     res.send({ result: false, data: error });
@@ -60,7 +61,7 @@ exports.postUpload = (req, res) => {
       console.log(err);
       res.status(500).json({ message: 'Failed to upload image' });
     } else {
-      res.json({ message: 'Image uploaded successfully', success: true, filepath : res.req.file.path});
+      res.json({ message: 'Image uploaded successfully', success: true, filepath: res.req.file.path });
     }
   });
 };

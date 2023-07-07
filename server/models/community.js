@@ -4,13 +4,13 @@ const community = function (Sequelize, Database) {
     {
       id: {
         type: Database.BIGINT,
-        allowNull: true,
+        allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
       user_id: {
         type: Database.BIGINT,
-        allowNull: false,
+        allowNull: true,
       },
       title: {
         type: Database.STRING(50),
@@ -22,19 +22,19 @@ const community = function (Sequelize, Database) {
       },
       img: {
         type: Database.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       comment: {
         type: Database.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       faviorite_num: {
         type: Database.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       faviorite_id: {
         type: Database.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
