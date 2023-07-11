@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 import FubaoMovie from "./FubaoMovie";
-import List from "./List";
+import ListMainPage from './ListMainPage'
+// import List from "./List";
 import Upload from "./Upload";
 
 const CommunityContainer = styled.div`
@@ -60,7 +61,7 @@ export default function Community() {
     </CommunityNav>
 
     <Communitysection>
-      {homeVisible && <List />}
+      {homeVisible && <ListMainPage />}
       {uploadVisible && <Upload />}
       {movieVisible && <FubaoMovie />}
     </Communitysection> 

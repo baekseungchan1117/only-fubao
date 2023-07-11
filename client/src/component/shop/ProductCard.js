@@ -1,39 +1,17 @@
 import Card from "./Card";
 import React, { useState } from "react";
-
 function ProductCard(props) {
   const [showCards, setShowCards] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
   const [showGoodsBox, setShowGoodsBox] = useState(true);
-
-
   const handleClick = () => {
     setShowCards(!showCards);
     setShowGoodsBox(false);
-
   };
-
-  // let codeExecuted = false;
-  // let showCards = false;
-
-  // const handleClick = () => {
-  //   if (!codeExecuted) {
-  //     codeExecuted = true;
-  //     showCards = true;
-  //   }
-  // };
-
-  // const handleClick = () => {
-  //   if (!handleClickExecuted) {
-  //     showCards = true;
-  //     handleClickExecuted = true;
-  //     console.log("하이");
-  //   }
-  // };
   return (
     <>
       <div className="goods-box">
-        <div className="goods-line">🐼금주의 핫템🐼</div>
+        <div className="goods-line">:판다_얼굴:BEST SELLER:판다_얼굴:</div>
       </div>
       <div className="goods-box-img">
         <div className="row">
@@ -42,7 +20,6 @@ function ProductCard(props) {
           })}
         </div>
       </div>
-
       <div className="goods-box-img">
         {showCards && (
           <div className="row">
@@ -52,21 +29,13 @@ function ProductCard(props) {
           </div>
         )}
       </div>
-
       {showGoodsBox && (
   <div className="goods-box">
     <div className="more-btn" onClick={handleClick}>
-      More
+      SEE MORE
     </div>
   </div>
 )}
-
-
-      {/* <div className="goods-box">
-        <div className="more-btn" onClick={handleClick}>
-          More
-        </div>
-      </div> */}
     </>
   );
 }

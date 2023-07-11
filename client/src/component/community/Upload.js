@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import Galley from "./Galley";
 import ImageUpload from "./ImageUpload";
+import { useSelector } from 'react-redux'
 
 import {
   UploadDiv,
@@ -16,6 +17,16 @@ export default function Upload() {
   const [Image, setImage] = useState('');
 
   let navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  console.log("dfsdf", user);
+
+
+  useEffect(() => {
+    if(!user.accessToken){
+      alert("로그인한 회원만 글을 작성할 수 있습니다.");
+      navigate("/login")
+    }
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -28,8 +39,9 @@ export default function Upload() {
       title: Title,
       content: Content,
       img: Image,
+      nickname: user.nickname
     };
-    console.log('body title content img입니다', body.title);
+    console.log('body title content img입니다', body);
 
     axios
       .post('http://localhost:8000/community/lounge', body)

@@ -1,16 +1,17 @@
+
 import React, { useState } from "react";
 import "./User.css";
 import { SERVER } from "../../lib/constant";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function LoginFunc() {
   const navigate = useNavigate();
-
   const [Email, setEmail] = useState("");
   const [PW, setPW] = useState("");
+
 
   const LoginFunc = async (e) => {
     e.preventDefault();
@@ -20,24 +21,25 @@ export default function LoginFunc() {
     }
     const user = {
       Email,
-      PW
-    }
-
-    // axios({
-    //   method: "POST",
-    //   url: `${SERVER}/user/signin`,
-    //   data: user
-    // }).then((res) => {
-    //   // console.log(res.data.data)
-    //   if (res.data.result) {
-    //     alert(`${res.data.data}님 환영합니다!`);
-    //     navigate(`/`)
-    //   } else {
-    //     alert("아이디 혹은 비밀번호가 맞지 않습니다.")
-    //   }
-    // })
-  }
-
+      PW,
+    };
+    axios({
+      method: "POST",
+      url: `${SERVER}/user/signin`,
+      data: user,
+    }).then((res) => {
+      console.log("user정보", res);
+      if (res.data.result) {
+        console.log(res.data);
+        alert(`${res.data.nickname}님 환영합니다!`);
+        localStorage.setItem("login", JSON.stringify({ token: res.data.token, userId: res.data.userID, nickname: res.data.nickname, }));
+        window.location.replace("/");
+      } else {
+        console.log(res);
+        alert("아이디 혹은 비밀번호가 맞지 않습니다.");
+      }
+    });
+  };
   return (
     <>
       <div class="wrapper">

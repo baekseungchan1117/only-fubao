@@ -3,7 +3,6 @@ import "./User.css";
 import axios from "axios";
 import { SERVER } from "../../lib/constant";
 import { useNavigate } from "react-router-dom";
-
 export default function Signup() {
   const [inputid, setInputid] = useState("");
   const [inputpw, setInputpw] = useState("");
@@ -16,7 +15,6 @@ export default function Signup() {
   const nicknameRef = useRef();
   const emailRef = useRef();
   const navigate = useNavigate();
-
   useEffect(() => {
     axios({
       method: "GET",
@@ -25,7 +23,6 @@ export default function Signup() {
       console.log("회원가입 화면 열기");
     });
   }, []);
-
   const checkinput = () => {
     if (inputid.trim().length === 0) {
       idRef.current.focus();
@@ -52,7 +49,6 @@ export default function Signup() {
   const submit = (e) => {
     e.preventDefault();
     if (!checkinput()) return;
-
     const user = {
       id: inputid,
       password: inputpw,
@@ -60,14 +56,20 @@ export default function Signup() {
       nickname: inputnickname,
       email: inputemail,
     };
-    console.log(user);
+    // console.log(user);
     axios({
       method: "POST",
-      url: `${SERVER}/user/signup`,
+      url: `http://localhost:8000/user/signup`,
       data: user,
-    }).then(() => {
-      console.log("회원가입 완료");
-      navigate("/Login");
+    }).then((res) => {
+      console.log(res.data.result);
+      if (res.data.result === true) {
+        console.log("회원가입 완료");
+        navigate("/Login");
+      } else {
+        alert("이메일 다시입력하세요");
+        emailRef.current.focus();
+      }
     });
   };
   return (
@@ -150,7 +152,6 @@ export default function Signup() {
           <button className="btn" type="submit" onClick={submit}>
             Sign up
           </button>
-          <a href="/Login"></a>
         </form>
       </div>
     </>

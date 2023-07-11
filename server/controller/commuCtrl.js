@@ -5,19 +5,39 @@ const multer = require('multer')
 const setUpload = require('../Util/upload');
 
 // 커뮤니티 전체 조회
+
 exports.getCommunity = async (req, res) => {
+  let sort = [];
+
+  if (req.query.sort === "최신순") {
+    sort.push(["createdAt", "DESC"]);
+  } else if (req.query.sort === "인기순") {
+    sort.push(["repleNum", "DESC"]);
+  }
+
   try {
-    const community = await Community.findAll();
+    const community = await Community.findAll({
+      order: sort,
+      where: {
+        [Op.or]: [
+          { title: { [Op.like]: `%${req.query.searchtitle}%` } },
+          { content: { [Op.like]: `%${req.query.searchtitle}%` } }
+        ]
+      }
+    });
     res.send({ result: true, data: community });
   } catch (error) {
     res.send({ result: false, data: error });
   }
 };
+
+
+
 // 커뮤니티 상세 조회
 exports.getCommunitySeg = async (req, res) => {
   try {
     const communitySeg = await Community.findOne({
-      attributes: ["title", "img", "content"],
+      attributes: ["title", "img", "content", "nickname"],
       where: {
         id: Number(req.params.id)
       },
@@ -27,15 +47,36 @@ exports.getCommunitySeg = async (req, res) => {
     res.send({ result: false, data: error });
   }
 };
+
+
+// 1등 인기 사진
+exports.getRankingImage = async (req, res) => {
+  try {
+    const rankingImage = await Community.findAll({
+      attributes: ["title", "img", "content", "nickname", "repleNum"],
+      order: [["repleNum", "DESC"]],
+      limit: 3,
+    });
+   res.send({ result: true, data: rankingImage });
+  } catch (error) {
+    console.log("Error:", error);
+    res.send({ result: false, data: error });
+  }
+};
+
+
+
+
 //게시글 작성
 exports.postCommunity = async (req, res) => {
   try {
-    const { title, img, content } = req.body;
+    const { title, img, content, nickname } = req.body;
     console.log('1', req.body, 'title=', title)
     const mycommunity = await Community.create({
       title,
       img,
       content,
+      nickname
     });
     console.log('mycommunity', mycommunity)
     res.send({ result: true, data: mycommunity });
@@ -84,13 +125,13 @@ exports.postUpload = (req, res, next) => {
 
 //게시글 수정
 exports.patchCommunity = async (req, res) => {
-  const { title, img, comment } = req.body;
+  const { title, img, content } = req.body;
   try {
     const patchCommunity = await Community.update(
       {
         title,
         img,
-        comment,
+        content,
       },
       {
         where: {

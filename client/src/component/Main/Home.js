@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import RankingImage from './RankingImage';
 
 const HomeContainer = styled.div`
   height: 700px; 
@@ -14,8 +15,7 @@ const HomeContainer = styled.div`
 export default function Home() {
   return (
     <HomeContainer>
-        <div>이번주 랭킹 사진</div>
-        <div>타이틀 소개</div>
+      <RankingImage/>
     </HomeContainer>
   )
 }
