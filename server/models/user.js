@@ -1,35 +1,38 @@
-const user = function (Sequelize, Database) {
-  return Sequelize.define(
+const user = function (Sequelize, DataTypes) {
+  const User = Sequelize.define(
     "user",
     {
       id: {
-        type: Database.BIGINT,
+        type: DataTypes.BIGINT,
         allowNull: false,
         primaryKey: true,
-        autoIncreament: true,
+        autoIncrement: true,
       },
       password: {
-        type: Database.STRING(255),
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
       username: {
-        type: Database.STRING(20),
+        type: DataTypes.STRING(20),
         allowNull: false,
       },
       nickname: {
-        type: Database.STRING(30),
+        type: DataTypes.STRING(30),
         allowNull: false,
       },
       email: {
-        type: Database.STRING(50),
+        type: DataTypes.STRING(500),
         allowNull: false,
       },
     },
     {
-      tablename: "user",
+      tableName: "user",
       freezeTableName: true,
       timestamps: false,
     }
   );
+
+  return User;
 };
+
 module.exports = user;

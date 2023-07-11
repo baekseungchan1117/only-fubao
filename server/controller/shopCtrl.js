@@ -22,4 +22,16 @@ exports.getShopSeg = async (req, res) => {
     res.send({ result: false, data: error });
   }
 };
+// 상품 세부 조회
+exports.getShopSeg = async (req, res) => {
+  try {
+    const shopSeg = await Shop.findOne({
+      where: { id },
+    });
+    console.log(shopSeg);
+    res.send({ result: true, data: shopSeg });
+  } catch (error) {
+    res.send({ result: false, data: error });
+  }
+};
 //상품 카트담기

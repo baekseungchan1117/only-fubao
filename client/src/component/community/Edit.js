@@ -14,6 +14,7 @@ export default function Edit() {
     const [Title, setTitle] = useState("");
     const [Content, setContent] = useState("");    
     let navigate = useNavigate();
+    console.log("f1111dsfsd", params.postNum);
   
     useEffect(() => {
       const fetchData = async () => {

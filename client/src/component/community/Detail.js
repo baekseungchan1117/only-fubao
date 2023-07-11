@@ -1,50 +1,21 @@
+import React,{useState} from 'react';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import Spinner from 'react-bootstrap/Spinner';
+import { useSelector } from 'react-redux';
+import { PostDiv, Post, BtnDiv } from '../../Style/PostDetailCSS'; // Import the necessary CSS styles
 
-import {
-  PostDiv,
-  SpinnerDiv,
-  Post,
-  BtnDiv,
-} from "../../Style/PostDetailCSS";
+export default function Detail(props) {
+  const { postNum } = useParams();
+  const navigate = useNavigate();
+  const [Flag, setFlag] = useState(false)
+  const user = useSelector((state) => state.user);
+  console.log("userdddd", user);
 
-export default function Detail() {
-  let params = useParams();
-  let navigate = useNavigate();
-  const [PostInfo, setPostInfo] = useState([]);
-  const [flag, setFlag] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let body = {
-          postNum: params.postNum
-        };
-        console.log(params.postNum)
-        const response = await axios.get(`http://localhost:8000/community/detail/${params.postNum}`, body);
-        console.log(response);
-          console.log(PostInfo);
-          setPostInfo(response.data.data);
-          setFlag(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
-  }, [params.postNum]);
-
-  const DeleteHandle = () => {
-    console.log("fff",params.postNum);
+  const deleteHandle = () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
       const fetchData = async () => {
         try {
-          let body = {
-            postNum: params.postNum
-          };
-          const response = await axios.delete(`http://localhost:8000/community/lounge/${params.postNum}`, body);
+          const response = await axios.delete(`http://localhost:8000/community/lounge/${postNum}`);
           console.log(response);
           if (response.status === 200) {
             alert("게시글이 삭제되었습니다.");
@@ -62,32 +33,26 @@ export default function Detail() {
   return (
     <div>
       <PostDiv>
-        {flag ? (
-          <>
-            <Post>
-              <h1>{PostInfo.title}</h1>
-              <h2>{PostInfo.image}</h2>
-              {/* {PostInfo.image ? (
-                <img src={`http://localhost:8000/${PostInfo.image}`} alt="" />
-              ) : null} */}
-              <p>{PostInfo.content}</p>
-            </Post>
+        <>
+          <Post>
+            <h1>{props.postInfo.title}</h1>
+            <h1>{props.postInfo.nickname}</h1>
+            {props.postInfo.img ? (
+              <img src={props.postInfo.img} alt="" style={{ width: "100%", height: "auto" }} />
+            ) : null}
+            <p>{props.postInfo.content}</p>
+          </Post>
+          {props.postInfo.nickname === JSON.parse(localStorage.getItem('login'))?.nickname && (
             <BtnDiv>
-              <Link to={`/edit/${params.postNum}`}>
+              <Link to={`/edit/${postNum}`}>
                 <button className="edit">UPDATE</button>
               </Link>
-              <button className="delete" onClick={DeleteHandle}>
+              <button className="delete" onClick={deleteHandle}>
                 DELETE
               </button>
             </BtnDiv>
-          </>
-        ) : (
-          <SpinnerDiv>
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
-          </SpinnerDiv>
-        )}
+          )}
+        </>
       </PostDiv>
     </div>
   );

@@ -6,7 +6,7 @@ const Sequelize = require("sequelize");
 const process = require("process");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.json")[env];
+const config = require(__dirname + "/../config/config.json")["development"];
 const db = {};
 
 let sequelize;
@@ -27,8 +27,11 @@ db.Home = require("./home")(sequelize, Sequelize);
 db.Community = require("./community")(sequelize, Sequelize);
 db.Shop = require("./shop")(sequelize, Sequelize);
 db.Cart = require("./cart")(sequelize, Sequelize);
+db.Reple = require("./reple")(sequelize, Sequelize);
 
-// db.User.hasMany(db.Community,{as:"communities", foreigKey:"user_id"})
+// db.User.hasMany(db.Community,{as:"communities", foreigKey:"id"})
+
+// db.Community.belongsTo(db.User, {as : "User", foreignkey:"user_id"})
 // db.User.hasMany(db.Cart,{as:"cartes", foreigKey:"user_id"})
 
 // db.Home.belongsTo(db.User)//, {as:"homes", foreigKey:"user_id"})
